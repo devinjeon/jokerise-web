@@ -62,72 +62,18 @@ if __name__ == "__main__":
 
     demo = VisualisationDemo(args)
 
-    if args.webcam:
-        assert args.input is None
-        # webcam
-        cam = cv2.VideoCapture(0)
-        for orignal_image, translated_image in tqdm.tqdm(
-                demo.run_on_video(cam)):
+    for input_item in args.input:
+        fname, ext = os.path.splitext(input_item)
+
+        if ext in [".jpg", ".jpeg", ".png"]:
+            original_image = cv2.imread(input_item)
+            original_image, translated_image = demo.run_on_image(original_image)
+
             if args.show_original:
-                concat = np.concatenate([orignal_image, translated_image],
+                concat = np.concatenate([original_image, translated_image],
                                         axis=1)
             else:
                 concat = translated_image
-            height, width = concat.shape[:2]
-            resized = cv2.resize(concat,
-                                 None,
-                                 fx=0.5,
-                                 fy=0.5,
-                                 interpolation=cv2.INTER_AREA)
-            cv2.imshow("webcam", resized)
-            if cv2.waitKey(1) == 27:
-                break  #esc to quit
 
-        cam.release()
-        cv2.destroyAllWindows()
-
-    else:
-        # image or videos
-        for input_item in args.input:
-            fname, ext = os.path.splitext(input_item)
-
-            if ext in [".jpg", ".jpeg", ".png"]:
-                original_image = cv2.imread(input_item)
-                original_image, translated_image = demo.run_on_image(
-                    original_image)
-
-                if args.show_original:
-                    concat = np.concatenate([original_image, translated_image],
-                                            axis=1)
-                else:
-                    concat = translated_image
-
-                cv2.imwrite(
-                    "translated_samples/" + os.path.basename(input_item),
-                    concat)
-
-            elif ext in [".mp4", ".avi"]:
-                cam = cv2.VideoCapture(input_item)
-                fps = cam.get(cv2.CAP_PROP_FPS)
-
-                frames = []
-                for orignal_image, translated_image in tqdm.tqdm(
-                        demo.run_on_video(cam)):
-                    if args.show_original:
-                        concat = np.concatenate(
-                            [orignal_image, translated_image], axis=1)
-                    else:
-                        concat = translated_image
-                    height, width = concat.shape[:2]
-                    resized = cv2.resize(concat,
-                                         None,
-                                         fx=0.5,
-                                         fy=0.5,
-                                         interpolation=cv2.INTER_AREA)
-                    frames.append(resized)
-
-                cam.release()
-
-                save_video(frames,
-                           "translated_samples/" + os.path.basename(input_item),
-                           fps)
+            cv2.imwrite("translated_samples/" + os.path.basename(input_item),
+                        concat)
