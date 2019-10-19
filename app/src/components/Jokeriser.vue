@@ -1,5 +1,6 @@
 <template>
   <div id="jokeriser">
+    <ImageViewer :inputFile="inputFile" :outputFileURL="outputFileURL" />
     <div id="image-selector">
       <b-form-file
         v-model="inputFile"
@@ -24,8 +25,13 @@
 </template>
 
 <script>
+import ImageViewer from './ImageViewer.vue'
+
 export default {
   name: 'Jokeriser',
+  components: {
+    ImageViewer
+  },
   data() {
     return {
       oldInputFile: null,
