@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Example" src="./assets/logo.jpg" width="80%" />
-    <jokeriser/>
+    <jokeriser />
   </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
   name: 'app',
   components: {
     jokeriser
-  },
+  }
 }
 </script>
 

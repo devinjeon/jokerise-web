@@ -1,7 +1,7 @@
 <template>
-    <div class="jokeriser">
-        <h1> Jockeriser </h1>
-    </div>
+  <div class="jokeriser">
+    <h1>Jockeriser</h1>
+  </div>
 </template>
 
 <script>
