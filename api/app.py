@@ -6,10 +6,10 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/')
-def hello():
-    """Return a friendly HTTP greeting."""
-    return 'Hello World!'
+@app.route('/jokerise', method=['POST'])
+def jokerise():
+    # TODO: save image and return jokerise img url
+    pass
 
 
 if __name__ == '__main__':
