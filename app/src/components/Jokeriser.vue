@@ -46,7 +46,6 @@ export default {
         // mock
         this.outputFileURL =
           'https://raw.githubusercontent.com/junkwhinger/jokerise/master/translated_samples/joaquin2.jpg'
-        alert(this.inputFile.type)
       } else {
         alert('Invalid File')
       }
