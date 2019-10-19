@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import jokeriser from './components/Jokeriser.vue'
+import Jokeriser from './components/Jokeriser.vue'
 
 export default {
   name: 'app',
   components: {
-    jokeriser
+    Jokeriser
   }
 }
 </script>
