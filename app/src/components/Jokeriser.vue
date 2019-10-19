@@ -26,6 +26,7 @@
 
 <script>
 import ImageViewer from './ImageViewer.vue'
+import axios from 'axios'
 
 export default {
   name: 'Jokeriser',
@@ -44,16 +45,29 @@ export default {
       if (this.inputFile instanceof File) {
         this.oldInputFile = this.inputFile
         // mock
-        this.outputFileURL =
-          'https://raw.githubusercontent.com/junkwhinger/jokerise/master/translated_samples/joaquin2.jpg'
+        let form = new FormData()
+        form.append('file', this.inputFile)
+        axios
+          .post('/jokerise', form, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then(response => {
+            this.outputFileURL =
+              'http://192.168.56.1:8081/jokerise/' + response.data
+          })
+          .catch(error => {
+            alert(error)
+          })
       } else {
-        alert('Invalid File')
+        alert('Invalid file')
       }
     }
   },
   watch: {
     inputFile: function(val) {
-      if (val == null) {
+      if (val == null || this.oldInputFile != this.inputFile) {
         this.outputFileURL = null
       }
     }
