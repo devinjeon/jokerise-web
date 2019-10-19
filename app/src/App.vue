@@ -1,7 +1,13 @@
 <template>
-  <div id="app">
-    <img alt="Example" src="./assets/logo.jpg" width="80%" />
-    <jokeriser />
+  <div class="container-fluid d-flex justify-content-center">
+    <div id="app">
+      <h1>Why so serious?</h1>
+      <p>
+        Not sure if Joker face would look good on you for Halloween? Try
+        <b>Jokeriser</b>!
+      </p>
+      <Jokeriser />
+    </div>
   </div>
 </template>
 
@@ -17,15 +23,19 @@ export default {
 </script>
 
 <style>
+body {
+  background-color: black;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #999999;
-  margin-top: 60px;
+  margin-top: 100px;
+  width: 70%;
+  text-align: center;
 }
-body {
-  background-color: black;
+h1 {
+  margin-bottom: 20px;
 }
 </style>
