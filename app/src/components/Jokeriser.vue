@@ -6,7 +6,7 @@
         v-model="inputFile"
         :state="Boolean(inputFile)"
         placeholder="Choose your face photo"
-        accept=".jpg, .png"
+        accept=".jpg, .jpeg, .png"
         drop-placeholder="Drop file here..."
       ></b-form-file>
     </div>
