@@ -89,6 +89,10 @@ export default {
 <style scoped>
 #image-selector {
   text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 600px;
+  width: 100%;
 }
 #jokeriser {
   text-align: center;
@@ -98,5 +102,6 @@ export default {
   margin-left: auto;
   margin-right: auto;
   width: 80%;
+  max-width: 300px;
 }
 </style>

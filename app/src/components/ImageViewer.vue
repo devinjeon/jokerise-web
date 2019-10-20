@@ -21,8 +21,14 @@ export default {
 </script>
 
 <style scoped>
+#image-viewer {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
 img {
+  max-height: 500px;
   max-width: 100%;
-  max-height: 40%;
+  width: auto;
 }
 </style>
