@@ -6,6 +6,13 @@
         Not sure if Joker face would look good on you for Halloween? Try
         <b>Jokeriser</b>!
       </p>
+      <p>
+        <a href="https://github.com/junkwhinger/jokerise">Source code</a> made
+        by <a href="https://jsideas.net"><b>jsideas@</b></a> &nbsp;<a
+          href="https://hyojun.me"
+          >jeonhyojun@</a
+        >
+      </p>
       <Jokeriser />
     </div>
   </div>
@@ -37,5 +44,8 @@ body {
 }
 h1 {
   margin-bottom: 20px;
+}
+a {
+  color: #555555;
 }
 </style>
