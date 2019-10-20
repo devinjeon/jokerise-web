@@ -49,7 +49,7 @@ def jokerise():
 
     img_hash = xxhash.xxh64(f.read()).hexdigest()
     jokerised_fname = img_hash + os.path.splitext(f.filename)[-1]
-    save_path = "result/" + jokerised_fname
+    save_path = "tmp/" + jokerised_fname
     if os.path.exists(save_path):
         return jokerised_fname
 
