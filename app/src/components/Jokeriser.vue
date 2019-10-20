@@ -1,6 +1,6 @@
 <template>
   <div id="jokeriser">
-    <ImageViewer :inputFile="inputFile" :outputFileURL="outputFileURL" />
+    <ImageViewer :src="src" />
     <div id="image-selector">
       <b-form-file
         v-model="inputFile"
@@ -37,7 +37,7 @@ export default {
     return {
       oldInputFile: null,
       inputFile: null,
-      outputFileURL: null
+      src: null
     }
   },
   methods: {
@@ -54,8 +54,7 @@ export default {
             }
           })
           .then(response => {
-            this.outputFileURL =
-              'http://192.168.56.1:8081/jokerise/' + response.data
+            this.src = 'http://192.168.56.1:8081/jokerise/' + response.data
           })
           .catch(error => {
             alert(error)
@@ -67,8 +66,14 @@ export default {
   },
   watch: {
     inputFile: function(val) {
-      if (val == null || this.oldInputFile != this.inputFile) {
-        this.outputFileURL = null
+      if (val != this.oldInputFile && val instanceof File) {
+        const reader = new FileReader()
+        reader.onload = e => {
+          this.src = e.target.result
+        }
+        reader.readAsDataURL(val)
+      } else if (val == null) {
+        this.src = null
       }
     }
   },

@@ -1,38 +1,20 @@
 <template>
   <div id="image-viewer">
-    <img v-if="inputSeen" alt="Input" :src="inputFilePath" />
-    <img v-if="outputFileURL" alt="Output" :src="outputFileURL" />
-    <img v-if="logoSeen" alt="Logo" src="../assets/logo.jpg" />
+    <img alt="Image" :src="imgSrc" />
   </div>
 </template>
 
 <script>
 export default {
   name: 'ImageViewer',
-  props: ['inputFile', 'outputFileURL'],
-  data: function() {
-    return {
-      inputFilePath: null
-    }
-  },
-  watch: {
-    inputFile: function(val) {
-      this.inputFilePath = null
-      if (val instanceof File) {
-        const reader = new FileReader()
-        reader.onload = e => {
-          this.inputFilePath = e.target.result
-        }
-        reader.readAsDataURL(val)
-      }
-    }
-  },
+  props: ['src'],
   computed: {
-    logoSeen: function() {
-      return this.inputFilePath ? false : true
-    },
-    inputSeen: function() {
-      return !this.inputFilePath || this.outputFileURL ? false : true
+    imgSrc: function() {
+      if (typeof this.src == 'string' && this.src != '') {
+        return this.src
+      } else {
+        return require('../assets/sample.jpg')
+      }
     }
   }
 }
