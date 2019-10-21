@@ -10,6 +10,9 @@
   "dependencies": {
     "bootstrap-vue": "^2.0.0-rc.19",
     "core-js": "^3.1.2",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "prettier": "^1.18.2",
     "vue": "^2.6.10"
   },
   "devDependencies": {
