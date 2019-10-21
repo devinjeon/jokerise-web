@@ -65,7 +65,7 @@ def jokerise():
 
 @app.route('/jokerise/<string:file_name>', methods=['GET'])
 def jokerised(file_name):
-    save_path = "result/" + file_name
+    save_path = "tmp/" + file_name
     if os.path.exists(save_path):
         return send_file(save_path)
     else:
