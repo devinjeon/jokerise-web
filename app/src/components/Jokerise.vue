@@ -29,7 +29,7 @@ import ImageViewer from './ImageViewer.vue'
 import axios from 'axios'
 
 export default {
-  name: 'Jokeriser',
+  name: 'Jokerise',
   components: {
     ImageViewer
   },

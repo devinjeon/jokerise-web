@@ -1,4 +1,4 @@
-# Jokeriser App
+# Jokerise App
 
 ## Project setup
 ```

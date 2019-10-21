@@ -4,7 +4,7 @@
       <h1>Why so serious?</h1>
       <p>
         Not sure if Joker face would look good on you for Halloween? Try
-        <b>Jokeriser</b>!
+        <b>Jokerise</b>!
       </p>
       <p>
         <a href="https://github.com/junkwhinger/jokerise">Source code</a> made
@@ -13,18 +13,18 @@
           >jeonhyojun@</a
         >
       </p>
-      <Jokeriser />
+      <Jokerise />
     </div>
   </div>
 </template>
 
 <script>
-import Jokeriser from './components/Jokeriser.vue'
+import Jokerise from './components/Jokerise.vue'
 
 export default {
   name: 'app',
   components: {
-    Jokeriser
+    Jokerise
   }
 }
 </script>
