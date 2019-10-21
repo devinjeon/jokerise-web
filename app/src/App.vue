@@ -8,7 +8,7 @@
       </p>
       <p>
         <a href="https://github.com/junkwhinger/jokerise">Source code</a> made
-        by <a href="https://jsideas.net"><b>Junsik Hwang</b></a> &nbsp;<a
+        by <a href="https://jsideas.net">Junsik Hwang</a> &nbsp;<a
           href="https://hyojun.me"
           >Hyojun Jeon</a
         >
