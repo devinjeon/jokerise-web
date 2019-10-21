@@ -72,6 +72,16 @@ def jokerised(file_name):
         return "fail"
 
 
+@app.route('/liveness_check', methods=['GET'])
+def liveness_check():
+    return ('', 204)
+
+
+@app.route('/readiness_check', methods=['GET'])
+def readiness_check():
+    return ('', 204)
+
+
 if __name__ == '__main__':
     init()
 
