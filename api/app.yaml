@@ -1,13 +1,28 @@
 runtime: custom
 env: flex
-entrypoint: gunicorn -b :$PORT main:app
-runtime_config:
-  python_version: 3
 network:
   instance_tag: jokeriser
+
+resources:
+  disk_size_gb: 12
+
 automatic_scaling:
   min_num_instances: 1
   max_num_instances: 3
   cool_down_period_sec: 120
   cpu_utilization:
     target_utilization: 0.8
+
+liveness_check:
+  path: "/liveness_check"
+  check_interval_sec: 30
+  timeout_sec: 10
+  success_threshold: 2
+  failure_threshold: 4
+readiness_check:
+  path: "/readiness_check"
+  check_interval_sec: 30
+  timeout_sec: 10
+  success_threshold: 2
+  failure_threshold: 2
+  app_start_timeout_sec: 300
