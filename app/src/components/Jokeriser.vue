@@ -54,7 +54,7 @@ export default {
             }
           })
           .then(response => {
-            this.src = 'http://192.168.56.1:8081/jokerise/' + response.data
+            this.src = 'http://localhost:8080/jokerise/' + response.data
           })
           .catch(error => {
             alert(error)
