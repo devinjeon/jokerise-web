@@ -63,6 +63,15 @@ def jokerise():
     return jokerised_fname
 
 
+@app.route('/jokerise/<string:file_name>', methods=['GET'])
+def jokerised(file_name):
+    save_path = "tmp/" + file_name
+    if os.path.exists(save_path):
+        return send_file(save_path)
+    else:
+        return "fail"
+
+
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
     # Engine, a webserver process such as Gunicorn will serve the app. This
