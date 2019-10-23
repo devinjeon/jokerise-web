@@ -10,5 +10,5 @@ $ pip install -r requirements.txt
 
 ## How to run
 ```
-$ python main.py
+$ ./run [dev|prod]
 ```

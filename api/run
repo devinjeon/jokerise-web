@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
+cd "$SCRIPT_DIR" || exit 1
+
+export HOST="0.0.0.0"
+export PORT=8080
+export CORS_ORIGIN="*"
+
+function dev() {
+  python main.py
+}
+
+function prod() {
+  # shellcheck disable=SC2034
+  CORS_ORIGIN="https://$(cat ../app/custom_domain)"
+  gunicorn -b "$HOST":"$PORT" main:app
+}
+
+env="$1"
+if [ -z "$env" ]; then
+  echo "* Usage: run [dev|prod]"
+  exit 1
+fi
+
+case "$env" in
+  "dev" | "development")
+    dev
+    ;;
+  "prod" | "production")
+    prod
+    ;;
+esac
