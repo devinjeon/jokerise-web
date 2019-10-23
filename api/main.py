@@ -7,8 +7,6 @@ import numpy as np
 import os
 import xxhash
 
-# If `entrypoint` is not defined in app.yaml,
-# App Engine will look for an app called `app` in `main.py`.
 app = Flask(__name__)
 
 # Settings for CORS
