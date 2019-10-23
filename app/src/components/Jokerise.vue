@@ -55,6 +55,7 @@ export default {
           .then(response => {
             this.src =
               process.env.VUE_APP_API_BASE_URL + '/jokerise/' + response.data
+            alert('Jokerised!')
           })
           .catch(error => {
             alert(error)
