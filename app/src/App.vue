@@ -39,6 +39,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #999999;
   margin-top: 100px;
+  margin-bottom: 100px;
   width: 70%;
   text-align: center;
 }
