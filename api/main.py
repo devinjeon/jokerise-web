@@ -1,4 +1,5 @@
 from flask import Flask, request, send_file
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
 
 import cv2
@@ -9,6 +10,11 @@ import xxhash
 # If `entrypoint` is not defined in app.yaml,
 # App Engine will look for an app called `app` in `main.py`.
 app = Flask(__name__)
+
+# Settings for CORS
+CORS_ORIGIN = os.environ['CORS_ORIGIN']
+CORS(app, origins=CORS_ORIGIN)
+
 predictor = None
 
 

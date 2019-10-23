@@ -26,7 +26,6 @@
 
 <script>
 import ImageViewer from './ImageViewer.vue'
-import axios from 'axios'
 
 export default {
   name: 'Jokerise',
@@ -47,14 +46,15 @@ export default {
         // mock
         let form = new FormData()
         form.append('file', this.inputFile)
-        axios
+        this.$axios
           .post('/jokerise', form, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
           })
           .then(response => {
-            this.src = 'http://localhost:8080/jokerise/' + response.data
+            this.src =
+              process.env.VUE_APP_API_BASE_URL + '/jokerise/' + response.data
           })
           .catch(error => {
             alert(error)
