@@ -1,6 +1,7 @@
 from flask import Flask, request, send_file
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
+from jokerise import create_jokeriser
 
 import cv2
 import numpy as np
@@ -13,36 +14,7 @@ app = Flask(__name__)
 CORS_ORIGIN = os.environ['CORS_ORIGIN']
 CORS(app, origins=CORS_ORIGIN)
 
-predictor = None
-
-
-def init():
-    global predictor
-    from jokerise.predictor import FaceTranslator
-
-    class JokeriseArgs:
-
-        def __init__(self):
-            # Number of input channels for CycleGAN generator
-            self.in_ch = 3
-            # Number of output channels for CycleGAN generator
-            self.out_ch = 3
-            # Number of first conv channels for CycleGAN generator
-            self.ngf = 64
-            # Number of residual blocks for CycleGAN generator
-            self.n_blocks = 6
-            # Number of residual blocks for CycleGAN generator
-            self.img_size = 128
-            # Model weight file path for CycleGAN generator
-            self.generator_weight_path = "jokerise/model_weights/e200_net_G_A.pth"
-            # Factor to enlarge face bounding box
-            self.box_multiply_factor = 1.1
-
-    args = JokeriseArgs()
-    predictor = FaceTranslator(args)
-
-
-init()
+jokeriser = create_jokeriser()
 
 
 @app.route('/jokerise', methods=['POST'])
@@ -61,7 +33,7 @@ def jokerise():
     img = np.fromfile(f, dtype=np.uint8)
     img = cv2.imdecode(img, cv2.COLOR_BGR2RGB)
 
-    jokerised = predictor(img)
+    jokerised = jokeriser(img)
 
     cv2.imwrite(save_path, jokerised)
     return jokerised_fname
