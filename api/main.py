@@ -19,16 +19,16 @@ jokeriser = create_jokeriser()
 
 @app.route('/jokerise', methods=['POST'])
 def jokerise():
-    # TODO: save image and return jokerise img url
     f = request.files['file']
-    # f.save(secure_filename(f.filename))
 
+    # Get hash from image file for caching
     img_hash = xxhash.xxh64(f.read()).hexdigest()
     jokerised_fname = img_hash + os.path.splitext(f.filename)[-1]
     save_path = "tmp/" + jokerised_fname
     if os.path.exists(save_path):
         return jokerised_fname
 
+    # Jokerise
     f.seek(0)
     img = np.fromfile(f, dtype=np.uint8)
     f.close()
@@ -36,6 +36,7 @@ def jokerise():
 
     jokerised = jokeriser(img)
 
+    # Save
     cv2.imwrite(save_path, jokerised)
     return jokerised_fname
 
