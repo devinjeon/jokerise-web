@@ -11,6 +11,7 @@ import xxhash
 ALLOWED_IMAGE_EXTENSIONS = {'jpg', 'jpeg', 'png'}
 GCS_CLIENT = storage.Client(project=os.environ['GCP_PROJECT_ID'])
 GCS_BUCKET = GCS_CLIENT.bucket(os.environ['GCS_BUCKET'])
+TEMP_DIR = os.environ['TEMP_DIR']
 
 jokeriser = create_jokeriser()
 
@@ -49,7 +50,7 @@ def jokerise():
     # Get hash from image file for caching
     img_hash = xxhash.xxh64(f.read()).hexdigest()
     jokerised_fname = img_hash + os.path.splitext(f.filename)[-1]
-    save_path = "tmp/" + jokerised_fname
+    save_path = '{}/{}'.format(TEMP_DIR, jokerised_fname)
     if os.path.exists(save_path):
         return jokerised_fname
 
