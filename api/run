@@ -6,8 +6,11 @@ cd "$SCRIPT_DIR" || exit 1
 export HOST="0.0.0.0"
 export PORT=8080
 export CORS_ORIGIN="*"
+export GCP_PROJECT_ID="jokeriser"
+export GCS_BUCKET="jokerised.hyojun.me"
 
 function dev() {
+  export GOOGLE_APPLICATION_CREDENTIALS="serviceaccount.json"
   python main.py
 }
 

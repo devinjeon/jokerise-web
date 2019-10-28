@@ -11,7 +11,6 @@ import xxhash
 ALLOWED_IMAGE_EXTENSIONS = {'jpg', 'jpeg', 'png'}
 GCS_CLIENT = storage.Client(project=os.environ['GCP_PROJECT_ID'])
 GCS_BUCKET = GCS_CLIENT.bucket(os.environ['GCS_BUCKET'])
-GCS_JOKERISED_DIR = 'results/'
 
 jokeriser = create_jokeriser()
 
@@ -32,7 +31,7 @@ def _check_extension(filename):
 
 def upload_file_to_gcs(f, filename):
     extension = _check_extension(filename)
-    blob = GCS_BUCKET.blob(GCS_JOKERISED_DIR + filename)
+    blob = GCS_BUCKET.blob(filename)
 
     subtype = 'png' if extension == 'png' else 'jpeg'
     content_type = 'image/' + subtype
