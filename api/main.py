@@ -1,6 +1,6 @@
 from flask import Flask, request, send_file
 from flask_cors import CORS
-from werkzeug.utils import secure_filename
+from google.cloud import storage
 from jokerise import create_jokeriser
 
 import cv2
@@ -8,13 +8,39 @@ import numpy as np
 import os
 import xxhash
 
+ALLOWED_IMAGE_EXTENSIONS = {'jpg', 'jpeg', 'png'}
+GCS_CLIENT = storage.Client(project=os.environ['GCP_PROJECT_ID'])
+GCS_BUCKET = GCS_CLIENT.bucket(os.environ['GCS_BUCKET'])
+GCS_JOKERISED_DIR = 'results/'
+
+jokeriser = create_jokeriser()
+
 app = Flask(__name__)
 
 # Settings for CORS
 CORS_ORIGIN = os.environ['CORS_ORIGIN']
 CORS(app, origins=CORS_ORIGIN)
 
-jokeriser = create_jokeriser()
+
+def _check_extension(filename):
+    extension = filename.split('.').pop().lower()
+    if ('.' not in filename or extension not in ALLOWED_IMAGE_EXTENSIONS):
+        raise BadRequest(
+            "{0} has an invalid name or extension".format(filename))
+    return extension
+
+
+def upload_file_to_gcs(f, filename):
+    extension = _check_extension(filename)
+    blob = GCS_BUCKET.blob(GCS_JOKERISED_DIR + filename)
+
+    subtype = 'png' if extension == 'png' else 'jpeg'
+    content_type = 'image/' + subtype
+    blob.upload_from_string(f.read(), content_type)
+
+    url = blob.public_url
+
+    return url
 
 
 @app.route('/jokerise', methods=['POST'])
@@ -36,18 +62,12 @@ def jokerise():
 
     jokerised = jokeriser(img)
 
-    # Save
+    # Save and upload
     cv2.imwrite(save_path, jokerised)
+    with open(save_path, 'rb') as f:
+        url = upload_file_to_gcs(f, jokerised_fname)
+
     return jokerised_fname
-
-
-@app.route('/jokerise/<string:file_name>', methods=['GET'])
-def jokerised(file_name):
-    save_path = "tmp/" + file_name
-    if os.path.exists(save_path):
-        return send_file(save_path)
-    else:
-        return "fail"
 
 
 if __name__ == '__main__':
