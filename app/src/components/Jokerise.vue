@@ -1,6 +1,9 @@
 <template>
   <div id="jokeriser">
-    <ImageViewer :src="src" />
+    <ImageViewer :src="src" v-show="!isLoading" />
+    <div id="spinner" v-show="isLoading">
+      <b-spinner label="Loading..."></b-spinner>
+    </div>
     <div id="image-selector">
       <b-form-file
         v-model="inputFile"
@@ -36,7 +39,8 @@ export default {
     return {
       oldInputFile: null,
       inputFile: null,
-      src: null
+      src: null,
+      isLoading: false
     }
   },
   methods: {
@@ -46,6 +50,7 @@ export default {
         // mock
         let form = new FormData()
         form.append('file', this.inputFile)
+        this.isLoading = true
         this.$axios
           .post('/jokerise', form, {
             headers: {
@@ -53,11 +58,12 @@ export default {
             }
           })
           .then(response => {
-            this.src =
-              process.env.VUE_APP_API_BASE_URL + '/jokerise/' + response.data
+            this.isLoading = false
+            this.src = response.data
             alert('Jokerised!')
           })
           .catch(error => {
+            this.isLoading = false
             alert(error)
           })
       } else {
@@ -93,6 +99,13 @@ export default {
   margin-left: auto;
   margin-right: auto;
   max-width: 600px;
+  width: 100%;
+}
+#spinner {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  margin-bottom: 100px;
   width: 100%;
 }
 #jokeriser {
