@@ -31,6 +31,7 @@ def jokerise():
 
     f.seek(0)
     img = np.fromfile(f, dtype=np.uint8)
+    f.close()
     img = cv2.imdecode(img, cv2.COLOR_BGR2RGB)
 
     jokerised = jokeriser(img)
