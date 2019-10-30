@@ -8,12 +8,14 @@
       </p>
       <p>
         <a href="https://github.com/junkwhinger/jokerise">Source code</a> made
-        by <a href="https://jsideas.net">Junsik Hwang</a> &nbsp;<a
-          href="https://hyojun.me"
-          >Hyojun Jeon</a
-        >
+        by <a href="https://jsideas.net">Junsik Hwang</a>,
+        <a href="https://hyojun.me">Hyojun Jeon</a>
       </p>
       <Jokerise />
+      <p>
+        NOTE: Your original photo is not saved on the server and the jokerised
+        image will be deleted after 24 hours.
+      </p>
     </div>
   </div>
 </template>
