@@ -30,6 +30,6 @@ readiness_check:
 
 env_variables:
   GCP_PROJECT_ID: "jokerise"
-  GCS_BUCKET: "jokerised.hyojun.me"
+  GCS_BUCKET: "jokerise-results"
   TEMP_DIR: "/tmp/jokerise"
   CORS_ORIGIN: "https://jokerise.hyojun.me"
