@@ -1,8 +1,13 @@
 runtime: custom
 env: flex
 
-manual_scaling:
-  instances: 1
+automatic_scaling:
+  min_instances: 1
+  max_instances: 3
+  cool_down_period_sec: 600
+  cpu_utilization:
+    target_utilization: 0.9
+
 resources:
   cpu: 1
   memory_gb: 1.5
