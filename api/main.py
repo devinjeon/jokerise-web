@@ -77,5 +77,15 @@ def jokerise():
     return jokerised_fname
 
 
+@app.route('/liveness_check', methods=['GET'])
+def liveness_check():
+    return ('', 200)
+
+
+@app.route('/readiness_check', methods=['GET'])
+def readiness_check():
+    return ('', 200)
+
+
 if __name__ == '__main__':
     app.run(host=os.environ['HOST'], port=os.environ['PORT'], debug=True)
