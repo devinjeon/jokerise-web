@@ -15,11 +15,16 @@ TEMP_DIR = os.environ['TEMP_DIR']
 
 jokeriser = create_jokeriser()
 
-app = Flask(__name__)
 
-# Settings for CORS
-CORS_ORIGIN = os.environ['CORS_ORIGIN']
-CORS(app, origins=CORS_ORIGIN)
+def create_app():
+    app = Flask(__name__)
+    # Settings for CORS
+    CORS_ORIGIN = os.environ['CORS_ORIGIN']
+    CORS(app, origins=CORS_ORIGIN)
+    return app
+
+
+app = create_app()
 
 
 def _check_extension(filename):
