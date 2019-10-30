@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+GCP_PROJECT_ID="jokerise"
+IMAGE=gcr.io/"$GCP_PROJECT_ID"/jokerise-api
+VERSION="$1"
+
+if [ -z "$VERSION" ]; then
+  echo "* Usage: ./deploy <new_version>"
+  exit 1
+fi
+
+gcloud auth configure-docker
+
+docker build -t "$IMAGE":"$VERSION" .
+docker push "$IMAGE":"$VERSION"
+
+gcloud app deploy --image-url "$IMAGE":"$VERSION"
