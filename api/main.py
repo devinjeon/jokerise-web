@@ -56,9 +56,12 @@ def jokerise():
     # Get hash from image file for caching
     img_hash = xxhash.xxh64(f.read()).hexdigest()
     jokerised_fname = img_hash + os.path.splitext(f.filename)[-1]
-    save_path = '{}/{}'.format(TEMP_DIR, jokerised_fname)
-    if os.path.exists(save_path):
-        return jokerised_fname
+
+    # Return existing result url if there is the jokerised image from the same image
+    # The jokerised image is deleted after 24 hours of creation by GCS lifecycle
+    blob = GCS_BUCKET.get_blob(jokerised_fname)
+    if blob is not None:
+        return blob.public_url
 
     # Jokerise
     f.seek(0)
