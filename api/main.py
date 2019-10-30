@@ -72,6 +72,7 @@ def jokerise():
     cv2.imwrite(save_path, jokerised)
     with open(save_path, 'rb') as f:
         url = upload_file_to_gcs(f, jokerised_fname)
+    os.remove(save_path)
 
     return jokerised_fname
 
