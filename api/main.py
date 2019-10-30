@@ -71,13 +71,17 @@ def jokerise():
 
     jokerised = jokeriser(img)
 
-    # Save and upload
+    # Save locally
+    save_path = '{}/{}'.format(TEMP_DIR, jokerised_fname)
     cv2.imwrite(save_path, jokerised)
+
+    # Upload to GCS
     with open(save_path, 'rb') as f:
         url = upload_file_to_gcs(f, jokerised_fname)
+
     os.remove(save_path)
 
-    return jokerised_fname
+    return url
 
 
 @app.route('/liveness_check', methods=['GET'])
