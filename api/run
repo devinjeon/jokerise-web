@@ -8,9 +8,7 @@ export PORT=8080
 export CORS_ORIGIN="*"
 export GCP_PROJECT_ID="jokeriser"
 export GCS_BUCKET="jokerised.hyojun.me"
-export TEMP_DIR='/tmp/jokerise'
-
-mkdir -p "$TEMP_DIR"
+export TEMP_DIR='/tmp/jokerise/'
 
 function dev() {
   export GOOGLE_APPLICATION_CREDENTIALS="serviceaccount.json"

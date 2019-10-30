@@ -12,6 +12,7 @@ ALLOWED_IMAGE_EXTENSIONS = {'jpg', 'jpeg', 'png'}
 GCS_CLIENT = storage.Client(project=os.environ['GCP_PROJECT_ID'])
 GCS_BUCKET = GCS_CLIENT.bucket(os.environ['GCS_BUCKET'])
 TEMP_DIR = os.environ['TEMP_DIR']
+os.makedirs(TEMP_DIR, exist_ok=True)
 
 jokeriser = create_jokeriser()
 
