@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -eo pipefail
 
 SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
 cd "$SCRIPT_DIR" || exit 1
@@ -7,32 +7,14 @@ cd "$SCRIPT_DIR" || exit 1
 export HOST="0.0.0.0"
 export PORT=8080
 export CORS_ORIGIN="*"
-export GCP_PROJECT_ID="jokeriser"
-export GCS_BUCKET="jokerised.hyojun.me"
+export GCP_PROJECT_ID="jokerise"
+export GCS_BUCKET="jokerise-results"
 export TEMP_DIR='/tmp/jokerise/'
-
-function dev() {
-  export GOOGLE_APPLICATION_CREDENTIALS="serviceaccount.json"
-  python main.py
-}
-
-function prod() {
-  # shellcheck disable=SC2086
-  CORS_ORIGIN="https://$(cat $SCRIPT_DIR/app/custom_domain)"
-  gunicorn -b "$HOST":"$PORT" main:app
-}
+export GOOGLE_APPLICATION_CREDENTIALS="serviceaccount.json"
 
 env="$1"
-if [ -z "$env" ]; then
-  echo "* Usage: ./run [dev|prod]"
-  exit 1
+if [[ "$env" == "gunicorn" ]]; then
+  gunicorn -b "$HOST":"$PORT" main:app
+else
+  python main.py
 fi
-
-case "$env" in
-  "dev" | "development")
-    dev
-    ;;
-  "prod" | "production")
-    prod
-    ;;
-esac
