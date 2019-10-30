@@ -32,4 +32,4 @@ env_variables:
   GCP_PROJECT_ID: "jokerise"
   GCS_BUCKET: "jokerised.hyojun.me"
   TEMP_DIR: "/tmp/jokerise"
-  CORS_ORIGIN: "jokerise.hyojun.me"
+  CORS_ORIGIN: "https://jokerise.hyojun.me"
