@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
 cd "$SCRIPT_DIR" || exit 1
@@ -16,14 +17,14 @@ function dev() {
 }
 
 function prod() {
-  # shellcheck disable=SC2034
-  CORS_ORIGIN="https://$(cat ../app/custom_domain)"
+  # shellcheck disable=SC2086
+  CORS_ORIGIN="https://$(cat $SCRIPT_DIR/app/custom_domain)"
   gunicorn -b "$HOST":"$PORT" main:app
 }
 
 env="$1"
 if [ -z "$env" ]; then
-  echo "* Usage: run [dev|prod]"
+  echo "* Usage: ./run [dev|prod]"
   exit 1
 fi
 
