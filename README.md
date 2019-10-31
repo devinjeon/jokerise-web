@@ -4,6 +4,9 @@
 
 https://jokerise.hyojun.me
 
+This is a project to serve [jokerise](https://github.com/junkwhinger/jokerise)
+on the web.
+
 ## Details
 
 * Frontend
