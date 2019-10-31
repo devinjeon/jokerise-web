@@ -6,16 +6,21 @@
         Not sure if Joker face would look good on you for Halloween? Try
         <b>Jokerise</b>!
       </p>
-      <p>
-        <a href="https://github.com/junkwhinger/jokerise">Source code</a> made
-        by <a href="https://jsideas.net">Junsik Hwang</a>,
-        <a href="https://hyojun.me">Hyojun Jeon</a>
-      </p>
       <Jokerise />
-      <p>
-        NOTE: Your original photo is not saved on the server and the jokerised
-        image will be deleted after 24 hours.
-      </p>
+      <section>
+        <p>
+          NOTE: Your original photo is not saved on the server and the jokerised
+          image will be deleted after 24 hours.
+        </p>
+        <p>
+          * Source Codes:
+          <a href="https://github.com/junkwhinger/jokerise">Jokerise</a>
+          /
+          <a href="https://github.com/devinjeon/jokerise-web">Web</a>
+          made by <a href="https://jsideas.net">Junsik Hwang</a>,
+          <a href="https://hyojun.me">Hyojun Jeon</a>
+        </p>
+      </section>
     </div>
   </div>
 </template>
