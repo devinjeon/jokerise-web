@@ -1,4 +1,4 @@
-# Jokerise with CycleGAN
+# Jokerise on web
 
 ![](screenshot.png)
 
