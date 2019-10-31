@@ -49,6 +49,24 @@ def upload_file_to_gcs(f, filename):
     return url
 
 
+def resize_img(img, max_height=500, max_width=600):
+    height, width, _ = img.shape
+    if height <= max_height and width <= max_width:
+        return img
+
+    height_rate = float(max_height) / height
+    width_rate = float(max_width) / width
+
+    # (width, height)
+    if height_rate < width_rate:
+        new_size = (int(width * height_rate), max_height)
+    else:
+        new_size = (max_width, int(height * width_rate))
+
+    resized_img = cv2.resize(img, new_size, interpolation=cv2.INTER_AREA)
+    return resized_img
+
+
 @app.route('/jokerise', methods=['POST'])
 def jokerise():
     f = request.files['file']
@@ -63,12 +81,14 @@ def jokerise():
     if blob is not None:
         return blob.public_url
 
-    # Jokerise
+    # Load image and resize
     f.seek(0)
     img = np.fromfile(f, dtype=np.uint8)
     f.close()
     img = cv2.imdecode(img, cv2.COLOR_BGR2RGB)
+    img = resize_img(img)
 
+    # Jokerise
     jokerised = jokeriser(img)
 
     # Save locally
