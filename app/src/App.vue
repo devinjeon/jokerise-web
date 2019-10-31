@@ -14,11 +14,24 @@
         </p>
         <p>
           * Source Codes:
-          <a href="https://github.com/junkwhinger/jokerise">Jokerise</a>
+          <a
+            href="https://github.com/junkwhinger/jokerise"
+            v-on:click="gaVisitEvent('sourcecode:jokerise')"
+            >Jokerise</a
+          >
           /
-          <a href="https://github.com/devinjeon/jokerise-web">Web</a>
-          made by <a href="https://jsideas.net">Junsik Hwang</a>,
-          <a href="https://hyojun.me">Hyojun Jeon</a>
+          <a
+            href="https://github.com/devinjeon/jokerise-web"
+            v-on:click="gaVisitEvent('sourcecode:jokerise-web')"
+            >Web</a
+          >
+          made by
+          <a href="https://jsideas.net" v-on:click="gaVisitEvent('jsideas.net')"
+            >Junsik Hwang</a
+          >,
+          <a href="https://hyojun.me" v-on:click="gaVisitEvent('hyojun.me')"
+            >Hyojun Jeon</a
+          >
         </p>
       </section>
     </div>
@@ -32,6 +45,14 @@ export default {
   name: 'app',
   components: {
     Jokerise
+  },
+  mounted() {
+    this.$ga.page('/main')
+  },
+  methods: {
+    gaVisitEvent: function(label) {
+      this.$ga.event('etc', 'visit', label, 1)
+    }
   }
 }
 </script>

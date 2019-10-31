@@ -45,12 +45,16 @@ export default {
   },
   methods: {
     jokeriseImage: function() {
+      this.$ga.event('jokerise', 'try', '-', 1)
+
       if (this.inputFile instanceof File) {
         this.oldInputFile = this.inputFile
         // mock
         let form = new FormData()
         form.append('file', this.inputFile)
         this.isLoading = true
+
+        this.$ga.event('jokerise', 'try:upload', '-', 2)
         this.$axios
           .post('/jokerise', form, {
             headers: {
@@ -61,13 +65,17 @@ export default {
             this.isLoading = false
             this.src = response.data
             alert('Jokerised!')
+
+            this.$ga.event('jokerise', 'jokerised', '-', 3)
           })
           .catch(error => {
             this.isLoading = false
             alert(error)
+            this.$ga.event('jokerise', 'error', error, 3)
           })
       } else {
         alert('Invalid file')
+        this.$ga.event('jokerise', 'error', 'invalid_file', 2)
       }
     }
   },
