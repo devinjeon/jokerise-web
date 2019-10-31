@@ -71,7 +71,7 @@ export default {
           .catch(error => {
             this.isLoading = false
             alert(error)
-            this.$ga.event('jokerise', 'error', error, 3)
+            this.$ga.event('jokerise', 'error', error.message, 3)
           })
       } else {
         alert('Invalid file')
