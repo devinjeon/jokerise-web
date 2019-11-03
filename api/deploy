@@ -3,9 +3,13 @@
 set -euo pipefail
 
 GCP_PROJECT_ID="jokerise"
-IMAGE=gcr.io/"$GCP_PROJECT_ID"/jokerise-api
-VERSION="$1"
 
+# NOTE: Specified the region for Google Conatiner Registry to reduce network cost
+# https://cloud.google.com/container-registry/docs/pushing-and-pulling#tag_the_local_image_with_the_registry_name
+REGION="asia"
+
+IMAGE="$REGION.gcr.io/$GCP_PROJECT_ID/jokerise-api"
+VERSION="$1"
 if [ -z "$VERSION" ]; then
   echo "* Usage: ./deploy <new_version>"
   exit 1
