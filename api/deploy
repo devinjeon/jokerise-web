@@ -10,14 +10,17 @@ REGION="asia"
 
 IMAGE="$REGION.gcr.io/$GCP_PROJECT_ID/jokerise-api"
 VERSION="$1"
+shift
 if [ -z "$VERSION" ]; then
   echo "* Usage: ./deploy <new_version>"
   exit 1
 fi
 
-gcloud auth configure-docker
-
-docker build -t "$IMAGE":"$VERSION" .
-docker push "$IMAGE":"$VERSION"
+BUILD="$*"
+if [[ "$BUILD" != "--no-build" ]]; then
+  gcloud auth configure-docker
+  docker build -t "$IMAGE":"$VERSION" .
+  docker push "$IMAGE":"$VERSION"
+fi
 
 gcloud app deploy --image-url "$IMAGE":"$VERSION"
