@@ -3,14 +3,14 @@ env: flex
 
 automatic_scaling:
   min_num_instances: 1
-  max_num_instances: 5
+  max_num_instances: 3
   cool_down_period_sec: 600
   cpu_utilization:
     target_utilization: 0.9
 
 resources:
-  cpu: 2
-  memory_gb: 4
+  cpu: 1
+  memory_gb: 2
   disk_size_gb: 15
 
 liveness_check:
