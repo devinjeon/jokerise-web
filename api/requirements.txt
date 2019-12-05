@@ -3,4 +3,4 @@ Flask-Cors==3.0.8
 google-cloud-storage==1.20.0
 gunicorn==19.9.0
 xxhash==1.4.2
-git+https://github.com/DevinJeon/jokerise.git@master
+git+https://github.com/DevinJeon/jokerise.git@0.1.0
