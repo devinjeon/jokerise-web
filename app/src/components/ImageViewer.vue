@@ -1,24 +1,8 @@
 <template>
   <div id="image-viewer">
-    <img alt="Image" :src="imgSrc" />
+    <img alt="Image" src="../assets/sample.jpg" />
   </div>
 </template>
-
-<script>
-export default {
-  name: 'ImageViewer',
-  props: ['src'],
-  computed: {
-    imgSrc: function() {
-      if (typeof this.src == 'string' && this.src != '') {
-        return this.src
-      } else {
-        return require('../assets/sample.jpg')
-      }
-    }
-  }
-}
-</script>
 
 <style scoped>
 #image-viewer {

@@ -1,40 +1,33 @@
 <template>
-  <div class="container-fluid d-flex justify-content-center">
-    <div id="app">
-      <h1>Why so serious?</h1>
-      <p>
-        Not sure if Joker face would look good on you for Halloween? Try
-        <b>Jokerise</b>!
+  <div id="app">
+    <h1>Why so serious?</h1>
+    <Jokerise />
+    <section>
+      <p class="notice">
+        NOTICE: Jokerise will be opened around <b>next Halloween!</b>
       </p>
-      <Jokerise />
-      <section>
-        <p>
-          NOTE: All the photos uploaded are not saved on the server and the
-          jokerised images will be deleted after 24 hours.
-        </p>
-        <p>
-          * Source Codes:
-          <a
-            href="https://github.com/junkwhinger/jokerise"
-            v-on:click="gaVisitEvent('sourcecode:jokerise')"
-            >Jokerise</a
-          >
-          /
-          <a
-            href="https://github.com/devinjeon/jokerise-web"
-            v-on:click="gaVisitEvent('sourcecode:jokerise-web')"
-            >Web</a
-          >
-          made by
-          <a href="https://jsideas.net" v-on:click="gaVisitEvent('jsideas.net')"
-            >Junsik Hwang</a
-          >,
-          <a href="https://hyojun.me" v-on:click="gaVisitEvent('hyojun.me')"
-            >Hyojun Jeon</a
-          >
-        </p>
-      </section>
-    </div>
+      <p>
+        * Source Codes:
+        <a
+          href="https://github.com/junkwhinger/jokerise"
+          v-on:click="gaVisitEvent('sourcecode:jokerise')"
+          >Jokerise</a
+        >
+        /
+        <a
+          href="https://github.com/devinjeon/jokerise-web"
+          v-on:click="gaVisitEvent('sourcecode:jokerise-web')"
+          >Web</a
+        >
+        made by
+        <a href="https://jsideas.net" v-on:click="gaVisitEvent('jsideas.net')"
+          >Junsik Hwang</a
+        >,
+        <a href="https://hyojun.me" v-on:click="gaVisitEvent('hyojun.me')"
+          >Hyojun Jeon</a
+        >
+      </p>
+    </section>
   </div>
 </template>
 
@@ -68,6 +61,8 @@ body {
   color: #999999;
   margin-top: 100px;
   margin-bottom: 100px;
+  margin-left: auto;
+  margin-right: auto;
   width: 70%;
   text-align: center;
 }
@@ -76,5 +71,9 @@ h1 {
 }
 a {
   color: #555555;
+}
+p.notice {
+  margin-top: 30px;
+  color: red;
 }
 </style>
