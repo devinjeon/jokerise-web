@@ -38,5 +38,5 @@ jobs:
       working-directory: ${{ env.APP_DIR }}
       env:
         BUILD_DIR: dist
-        AUTHOR_NAME: Github Action
+        AUTHOR_NAME: GitHub Action
         GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
