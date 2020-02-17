@@ -1,0 +1,41 @@
+name: Deploy static webpages to github Page
+on:
+  push:
+    branches:
+    - master
+    paths:
+    - 'app/**'
+
+jobs:
+  depoly:
+    runs-on: ubuntu-18.04
+    env:
+      APP_DIR: ./app
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+
+    - name: Install packages
+      run: npm install
+      working-directory: ${{ env.APP_DIR }}
+
+    - name: Lint
+      run: npm run lint
+      working-directory: ${{ env.APP_DIR }}
+
+    - name: Build
+      run: npm run build
+      working-directory: ${{ env.APP_DIR }}
+
+    - name: Deploy to gh-pages
+      run: ./deploy
+      working-directory: ${{ env.APP_DIR }}
+      env:
+        BUILD_DIR: dist
+        AUTHOR_NAME: Github Action
+        GITHUB_PAT: ${{ secrets.GITHUB_PAT }}

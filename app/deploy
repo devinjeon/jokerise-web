@@ -4,8 +4,50 @@ set -euo pipefail
 SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
 cd "$SCRIPT_DIR" || exit 1
 
-npm run lint
-npm run build
+# Check if BUILD_DIR exists
+[[ -v BUILD_DIR ]] || BUILD_DIR=dist
+if [[ -n "$BUILD_DIR" && ! -d "$BUILD_DIR" ]]; then
+    echo "ERROR: Directory $BUILD_DIR doesn\'t exists"
+    exit 1
+fi
 
-# shellcheck disable=SC2086
-gsutil rsync -d -R "$SCRIPT_DIR/dist/" gs://"$(cat $SCRIPT_DIR/custom_domain)"
+# Commit hash
+[[ -v GITHUB_SHA ]] || GITHUB_SHA="$(git rev-parse HEAD)"
+echo "Target commit: $GITHUB_SHA"
+
+# Get parents repository configurations if script run on local
+if [[ ! -v GITHUB_WORKSPACE ]]; then
+    PARENT_REPO_USERNAME="$(git config --get user.name)"
+    PARENT_REPO_USEREMAIL="$(git config --get user.email)"
+    PARENT_REPO_GIT_URL="$(git remote get-url --all origin)"
+fi
+
+# Set CNAME
+if [[ -v CNAME ]]; then
+    echo "$CNAME" > CNAME
+else
+    cp CNAME $BUILD_DIR
+fi
+
+cd "$BUILD_DIR" || exit 1
+rm -rf .git
+
+git init
+git checkout -b gh-pages
+git add --all
+
+# If this script run on GitHub-Hosted runners(by GitHub Actions), these git configurations required
+# and the environment variable GITHUB_PAT(Personal access token) should exist.
+# https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line
+if [[ -v GITHUB_WORKSPACE ]]; then
+    git config user.name "$AUTHOR_NAME"
+    git remote add origin \
+        https://devinjeon:"$GITHUB_PAT"@github.com/devinjeon/jokerise-web.git
+else
+    git config user.name "$PARENT_REPO_USERNAME" 
+    git config user.email "$PARENT_REPO_USEREMAIL" 
+    git remote add origin "$PARENT_REPO_GIT_URL"
+fi
+
+git commit -m "Deploy GitHub pages: $GITHUB_SHA"
+git push -f origin gh-pages
