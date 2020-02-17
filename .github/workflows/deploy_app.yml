@@ -3,6 +3,7 @@ on:
   push:
     branches:
     - master
+    - temporarily-closed
     paths:
     - 'app/**'
 
