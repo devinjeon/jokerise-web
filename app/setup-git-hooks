@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
+cd "$SCRIPT_DIR" || exit 1
+
+REPO_PATH=$(git rev-parse --show-toplevel)
+find "git-hooks" -mindepth 1 -exec ln -sri {} "$REPO_PATH/.git/hooks" \;
+
+echo "completed"
