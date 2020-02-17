@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2086
+
+changed=$(git diff --name-only --exit-code --cached)
+
+# If there are application codes changes,
+# require to ensure 'npm run lint'
+APP_DIR="app/"
+app_changes=$(echo "$changed" | grep "^$APP_DIR")
+if [[ -n "$app_changes" ]]; then
+    (cd "$APP_DIR" && npm run lint) || exit 1
+    git add -p $app_changes
+fi
+
+# If there is no changes After linting,
+# stop committing
+git diff --name-only --exit-code --cached \
+    && echo "Failed to commit because there is no changes after linting" \
+    && exit 1
+
+exit 0
