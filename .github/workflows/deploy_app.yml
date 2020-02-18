@@ -1,4 +1,4 @@
-name: Deploy static webpages to github Page
+name: Deploy static web pages to GitHub Page
 on:
   push:
     branches:
@@ -8,7 +8,7 @@ on:
     - 'app/**'
 
 jobs:
-  depoly:
+  deploy:
     runs-on: ubuntu-18.04
     env:
       APP_DIR: ./app
