@@ -1,12 +1,12 @@
-from flask import Flask, request, send_file
-from flask_cors import CORS
-from google.cloud import storage
-from jokerise import create_jokeriser
+import os
 
 import cv2
 import numpy as np
-import os
 import xxhash
+from flask import Flask, request
+from flask_cors import CORS
+from google.cloud import storage
+from jokerise import create_jokeriser
 
 ALLOWED_IMAGE_EXTENSIONS = {'jpg', 'jpeg', 'png'}
 GCS_CLIENT = storage.Client(project=os.environ['GCP_PROJECT_ID'])
