@@ -31,7 +31,7 @@ app = create_app()
 def _check_extension(filename):
     extension = filename.split('.').pop().lower()
     if ('.' not in filename or extension not in ALLOWED_IMAGE_EXTENSIONS):
-        raise BadRequest(
+        raise Exception(
             "{0} has an invalid name or extension".format(filename))
     return extension
 
