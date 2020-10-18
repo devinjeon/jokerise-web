@@ -7,8 +7,8 @@ cd "$SCRIPT_DIR" || exit 1
 export HOST="0.0.0.0"
 export PORT=8080
 export CORS_ORIGIN="*"
-export GCP_PROJECT_ID="jokerise"
-export GCS_BUCKET="jokerise-results"
+export GCP_PROJECT_ID="jokerise-292915"
+export GCS_BUCKET="jokerise-results-1"
 export TEMP_DIR='/tmp/jokerise/'
 export GOOGLE_APPLICATION_CREDENTIALS="serviceaccount.json"
 

@@ -29,7 +29,7 @@ readiness_check:
   app_start_timeout_sec: 600
 
 env_variables:
-  GCP_PROJECT_ID: "jokerise"
-  GCS_BUCKET: "jokerise-results"
+  GCP_PROJECT_ID: "jokerise-292915"
+  GCS_BUCKET: "jokerise-results-1"
   TEMP_DIR: "/tmp/jokerise"
   CORS_ORIGIN: "https://jokerise.hyojun.me"

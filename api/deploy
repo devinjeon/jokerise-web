@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-GCP_PROJECT_ID="jokerise"
+GCP_PROJECT_ID="jokerise-292915"
 
 # NOTE: Specified the region for Google Conatiner Registry to reduce network cost
 # https://cloud.google.com/container-registry/docs/pushing-and-pulling#tag_the_local_image_with_the_registry_name
