@@ -4,7 +4,7 @@
     <Jokerise />
     <section>
       <p class="notice">
-        NOTICE: Jokerise will be opened around <b>next Halloween!</b>
+        NOTICE: Sorry, This Jokerise web service is closed now.
       </p>
       <p>
         * Source Codes:

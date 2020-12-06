@@ -2,7 +2,7 @@
 
 ![](screenshot.png)
 
-https://jokerise.hyojun.me
+https://jokerise.hyojun.me (Closed)
 
 This is a project to serve [jokerise](https://github.com/junkwhinger/jokerise)
 on the web.
