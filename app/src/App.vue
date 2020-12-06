@@ -9,8 +9,8 @@
       <Jokerise />
       <section>
         <p>
-          NOTE: Your original photo is not saved on the server and the jokerised
-          image will be deleted after 24 hours.
+          NOTE: All the photos uploaded are not saved on the server and the
+          jokerised images will be deleted after 24 hours.
         </p>
         <p>
           * Source Codes:
